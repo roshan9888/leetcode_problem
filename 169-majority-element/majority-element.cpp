@@ -20,19 +20,36 @@ public:
         // }
         // return -1;
 
-        //optimal solution
-        int n=nums.size();
-        int m=floor(n/2);
-        map<int,int>mp;
-        for(int i=0;i<n;i++){
-            mp[nums[i]]++;
-        }
+        //better solution
+        // int n=nums.size();
+        // int m=floor(n/2);
+        // map<int,int>mp;
+        // for(int i=0;i<n;i++){
+        //     mp[nums[i]]++;
+        // }
 
-        for(auto it:mp){
-            if(it.second>m){
-                return it.first;
+        // for(auto it:mp){
+        //     if(it.second>m){
+        //         return it.first;
+        //     }
+        // }
+        // return -1;
+
+        //optimal solution
+        int count=0;
+        int ele;
+        for(int i=0;i<nums.size();i++){
+            if(count==0){
+                count++;
+                ele=nums[i];
+            }
+            else if(nums[i]==ele){
+                count++;
+            }
+            else{
+                count--;
             }
         }
-        return -1;
+        return ele;
     }
 };
