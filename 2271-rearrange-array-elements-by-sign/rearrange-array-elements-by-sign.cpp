@@ -8,9 +8,7 @@ public:
         //     if(nums[i]>0){
         //         pos.push_back(nums[i]);
         //     }
-        // }
-        // for(int i=0;i<nums.size();i++){
-        //     if(nums[i]<0){
+            //    else{
         //         neg.push_back(nums[i]);
         //     }
         // }
@@ -37,5 +35,8 @@ public:
             }
         }
         return ans;
+
+        //follow up question if positive are more the negative
+        //if negatives are more then postive
     }
 };
