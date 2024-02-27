@@ -1,22 +1,17 @@
 class Solution {
 public:
     bool canConstruct(string s, string t) {
-        int i=0;
-        int j=0;
-        int count=0;
-        sort(s.begin(),s.end());
-        sort(t.begin(),t.end());
-        if(s.size()==0) return true;
-        while(j<t.size()){
-            if(s[i]==t[j]){
-                i++;
-                j++;
-                count++;
-            }
-            else{
-                j++;
-            }
+        
+        if(s.length()>t.length()) return false;
+        int alphabets_counter[26] = {0};
+        for(char c : t){
+            alphabets_counter[c-'a']++;
         }
-        return count==s.size() ? true : false;
+
+        for(char c : s){
+            if(alphabets_counter[c-'a']==0) return false;
+            alphabets_counter[c-'a']--;
+        }
+        return true;
     }
 };
