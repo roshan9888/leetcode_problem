@@ -1,6 +1,7 @@
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
+        //optimal solution
         int prefix=1,suffix=1;
         int n=nums.size();
         int maxi=INT_MIN;
@@ -16,5 +17,7 @@ public:
 
         }
         return maxi;
+
+        // time complexity O(n)
     }
 };
