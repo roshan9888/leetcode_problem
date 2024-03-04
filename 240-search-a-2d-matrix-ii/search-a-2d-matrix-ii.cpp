@@ -17,15 +17,32 @@ public:
        return false;
     }
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        int n=matrix.size();
-        int m=matrix[0].size();
-        bool ans;
-        for(int i=0;i<n;i++){
-            ans=search(matrix[i],target,m);
-            if(ans){
-                return ans;
+        // int n=matrix.size();
+        // int m=matrix[0].size();
+        // bool ans;
+        // for(int i=0;i<n;i++){
+        //     ans=search(matrix[i],target,m);
+        //     if(ans){
+        //         return ans;
+        //     }
+        // }
+        // return ans;
+
+        int n = matrix.size();
+        int m = matrix[0].size();
+
+        int rows = 0 , cols = m - 1;
+
+        while(rows < n && cols >= 0){
+            if(matrix[rows][cols] == target){
+                return true;
+            }else if(target > matrix[rows][cols]){
+                rows++ ;
+            }else{
+                cols--;
             }
         }
-        return ans;
+
+        return false;
     }
 };
