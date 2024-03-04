@@ -5,7 +5,7 @@ bool compare(const pair<int, int>& a, const pair<int, int>& b) {
 class Solution {
 public:
     string frequencySort(string s) {
-        map<char,int>mp;
+        unordered_map<char,int>mp;
         for(int i=0;i<s.size();i++){
             mp[s[i]]++;
         }
