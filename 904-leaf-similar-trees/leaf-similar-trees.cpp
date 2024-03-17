@@ -17,11 +17,9 @@ public:
     }
 
     if (!root->left && !root->right) {
-        // If the current node is a leaf node, add its value to the vector
         leafNodes.push_back(root->val);
     }
 
-    // Traverse the left and right subtrees
     getLeafNodes(root->left, leafNodes);
     getLeafNodes(root->right, leafNodes);
 }
