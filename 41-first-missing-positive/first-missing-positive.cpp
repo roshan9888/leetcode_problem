@@ -10,7 +10,6 @@ public:
             cout<<it.first<<" "<<it.second<<endl;
         }
         long long n=abs(nums[nums.size()-1]);
-        cout<<n<<" ";
         for(int i=1;i<=n+1;i++){
             if(mp.find(i)==mp.end()){
                 return i;
