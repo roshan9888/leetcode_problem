@@ -26,34 +26,19 @@ public:
         // return ans;
 
         vector<string> result;
-
-      int i =0;
-      int numberStream=1;
-
-
-      while(i<target.size()){
-
-          if(target[i]==numberStream){
-
-             result.push_back("Push");
-             i++;
-             numberStream++;
-
-
-          }else{
-
-
+        int i =0;
+        int numberStream=1;
+        while(i<target.size()){
+            if(target[i]==numberStream){
+                result.push_back("Push");
+                i++;
+                numberStream++;
+            }else{
                 result.push_back("Push");
                 result.push_back("Pop");
                 numberStream++;
-
-
-          }
-
-
-
-      }
-
-      return result;
+            }
+        }
+        return result;
     }
 };
