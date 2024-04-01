@@ -5,7 +5,6 @@ public:
         int count=0;
         int n=s.size();
         bool flag=1;
-        cout<<n<<" ";
         for(int i=n-1;i>=0;i--){
             if(s[i]==' ' && flag==1){
                 continue;
