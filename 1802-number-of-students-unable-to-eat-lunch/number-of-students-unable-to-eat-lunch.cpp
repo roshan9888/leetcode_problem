@@ -4,7 +4,10 @@ public:
         vector<int> counts(2, 0);
         for (int student : students)
             counts[student]++;
-
+        
+        for (auto it : counts) {
+        cout << it << endl;
+    }
         int remaining = sandwiches.size();
         for (int sandwich : sandwiches) {
             if (counts[sandwich] == 0)
@@ -14,7 +17,6 @@ public:
             counts[sandwich]--;
             remaining--;
         }
-
         return remaining;
     }
 };
