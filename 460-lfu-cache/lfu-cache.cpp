@@ -36,9 +36,6 @@ struct List {
         delnext->prev = delprev;
         size--; 
     }
-    
-    
-    
 };
 class LFUCache {
     map<int, Node*> keyNode; 
