@@ -1,77 +1,59 @@
 class Solution {
-
-     vector<int>previoussmaller(vector<int>&input){
-        stack<int>s;
-        s.push(-1);
-        vector<int>ans(input.size());
-        for(int i=0;i<input.size();i++){
-            int curr=input[i];
-            while(s.top()!=-1 && input[s.top()]>=curr){
-                s.pop();
-            }
-            ans[i]=s.top();
-            s.push(i);
-        }
-        return ans;
-    }
-
-    vector<int>nextsmaller(vector<int>&input){
-        stack<int>s;
-        s.push(-1);
-        vector<int>ans(input.size());
-        for(int i=input.size()-1;i>=0;i--){
-            int curr=input[i];
-            while(s.top()!=-1 && input[s.top()]>=curr){
-                s.pop();
-            }
-            ans[i]=s.top();
-            s.push(i);
-        }
-        return ans;
-    }
-
-    int largestRectangleArea(vector<int>& heights) {
-        vector<int>prev=previoussmaller(heights);
-
-        vector<int>next=nextsmaller(heights);
-        int size=heights.size();
-        int maxrect=INT_MIN;
-        for(int i=0;i<heights.size();i++){
-            int length=heights[i];
-
-            if(next[i]==-1){
-                next[i]=size;
-            }
-            int width=next[i]-prev[i]-1;
-            int area=length*width;
-            maxrect=max(maxrect,area);
-        }  
-        return maxrect;
-    }
 public:
-    int maximalRectangle(vector<vector<char>>& matrix) {
-        vector<vector<int>>v;
-        int n=matrix.size();
-        int m=matrix[0].size();
+    int find_max(vector<int>&arr){
+        int n=arr.size();
+        vector<int>left(n);
+        vector<int>right(n);
+        stack<int>s;
+        int ans=INT_MIN;
         for(int i=0;i<n;i++){
-            vector<int>t;
-            for(int j=0;j<m;j++){
-               t.push_back(matrix[i][j]-'0');
+            while(!s.empty() && arr[s.top()]>=arr[i]){
+                s.pop();
             }
-            v.push_back(t);
+            if(s.empty()) left[i]=0;
+            else left[i]=s.top()+1;
+            s.push(i);
         }
-        int area = largestRectangleArea(v[0]);
-        for(int i=1;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(v[i][j]){
-                    v[i][j]+=v[i-1][j];
+
+        //clear the stack for reuse
+        while(!s.empty()) s.pop();
+
+        for(int i=n-1;i>=0;i--){
+            while(!s.empty() && arr[s.top()]>=arr[i]){
+                s.pop();
+            }
+            if(s.empty()) right[i]=n-1;
+            else right[i]=s.top()-1;
+            s.push(i);
+
+            ans=max(ans,(right[i]-left[i]+1)*arr[i]);
+        }
+        return ans;
+    }
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int row=matrix.size();
+        cout<<row<<" ";
+        int col=matrix[0].size();
+        cout<<col<<" ";
+        vector<int>arr(col,0);
+        int maxi=INT_MIN;
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                if(matrix[i][j]-'0'==0){
+                    arr[j]=0;
                 }
                 else{
-                    v[i][j]=0;
+                arr[j]+=matrix[i][j]-'0';
                 }
             }
-            area=max(area,largestRectangleArea(v[i]));
+            maxi=max(maxi,find_max(arr));
         }
-        return area;
+        
+        // for(int it:arr){
+        //     cout<<it<<" ";
+        // }
+        
+        // return 1;
+        return maxi;
     }
 };
