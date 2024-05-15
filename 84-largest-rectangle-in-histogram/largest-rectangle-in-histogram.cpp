@@ -35,6 +35,7 @@ public:
         vector<int>left(n);
         vector<int>right(n);
         stack<int>s;
+        int ans=INT_MIN;
         for(int i=0;i<n;i++){
             while(!s.empty() && height[s.top()]>=height[i]){
                 s.pop();
@@ -54,11 +55,13 @@ public:
             if(s.empty()) right[i]=n-1;
             else right[i]=s.top()-1;
             s.push(i);
-        }
-        int ans=INT_MIN;
-        for(int i=0;i<n;i++){
+
             ans=max(ans,(right[i]-left[i]+1)*height[i]);
         }
+        // int ans=INT_MIN;
+        // for(int i=0;i<n;i++){
+        //     ans=max(ans,(right[i]-left[i]+1)*height[i]);
+        // }
         return ans;
     }
 };
