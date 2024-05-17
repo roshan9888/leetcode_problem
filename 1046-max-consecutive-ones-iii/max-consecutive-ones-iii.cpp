@@ -1,53 +1,72 @@
 class Solution {
 public:
     int longestOnes(vector<int>& nums, int k) {
-        // int i=0;
-        // int j=0;
-        // int zeroes=0;
-        // int sum=0;
-        // while(j<nums.size()){
-        //     if(nums[i]==0){
-        //         zeroes++;
-        //         k--;
-        //         j++;
-        //     }
-        //     if(k<0){
-        //         sum-=nums[i];
-        //         if(nums[i]==0){
-        //             zeroes--;
-        //             k++;
+        //brute force
+        // int maxi=0;
+        // for(int i=0;i<nums.size();i++){
+        //     int k1=k;
+        //     for(int j=i;j<nums.size();j++){
+        //         if(nums[j]==1){
+        //             maxi=max(maxi,j-i+1);
         //         }
-        //         i++;
-        //     }
-        //     if(zeroes<=k){
-        //       sum+=nums[j];
-        //        j++;
+        //         else if(nums[j]==0 && k1>0){
+        //             maxi=max(maxi,j-i+1);
+        //             k1--;
+        //         }
+        //         else{
+        //             break;
+        //         }
         //     }
         // }
-        // return sum;
+        // return maxi;
 
-        int i = 0;
-        int j = 0;
-        int sum = 0;
-        int maxLength = 0;
+        //optimal solution
+        // int i=0;
+        // int j=0;
+        // int maxi=0;
+        // int zerocount=0;
+        // while(j<nums.size()){
+        //     if(nums[j]==1){
+        //         maxi=max(maxi,j-i+1);
+        //         j++;
+        //     }
+        //     else if(nums[j]==0){
+        //         if(zerocount<k){
+        //         maxi=max(maxi,j-i+1);
+        //         j++;
+        //         zerocount++;
+        //         }
+        //     }
+        //     else{
+        //         while(zerocount==k){
+        //         if(nums[i]==0){
+        //             zerocount--;
+        //         }
+        //         i++;
+        //         }
+        //     }
+        // }
+        // return maxi;
+    int left = 0, right = 0;
+    int maxOnes = 0;
+    int zeroCount = 0;
 
-        while (j < nums.size()) {
-            if (nums[j] == 0) {
-                k--;
-            }
-
-            while (k < 0) {
-                if (nums[i] == 0) {
-                    k++;
-                }
-                i++;
-            }
-
-            sum = j - i + 1;
-            maxLength = std::max(maxLength, sum);
-            j++;
+    while (right < nums.size()) {
+        if (nums[right] == 0) {
+            zeroCount++;
         }
 
-        return maxLength;
+        while (zeroCount > k) {
+            if (nums[left] == 0) {
+                zeroCount--;
+            }
+            left++;
+        }
+
+        maxOnes = max(maxOnes, right - left + 1);
+        right++;
+    }
+
+    return maxOnes;
     }
 };
