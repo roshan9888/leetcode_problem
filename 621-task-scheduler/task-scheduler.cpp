@@ -6,8 +6,8 @@ public:
             counts[task]++;
         }
         priority_queue<int>pq;
-        for(auto c:counts){
-            pq.push(c.second);
+        for(auto it:counts){
+            pq.push(it.second);
         }
         int result=0;
         while(!pq.empty()){
@@ -21,11 +21,10 @@ public:
                 }
             }
             for(auto t:tmp){
-                if(t) pq.push(t);
-                
-            }
-            result+=pq.empty()?time:n+1;
+            if(t) pq.push(t);
         }
+        result+=pq.empty()?time:n+1;
+        } 
         return result;
     }
 };
