@@ -28,10 +28,10 @@ public:
         return v1;
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        vector<int>v1;
-        vector<int>v2;
-        v1=solve(root,p);
-        v2=solve(root,q);
+        // vector<int>v1;
+        // vector<int>v2;
+        // v1=solve(root,p);
+        // v2=solve(root,q);
         // int ans=0;
         // bool find=false;
         // for(int i=v1.size()-1;i>=0;i--){
@@ -49,12 +49,31 @@ public:
         // TreeNode*ans1=new TreeNode(ans);
         // return ans1;
 
-        int i;
-        for (i = 0; i < v1.size() && i < v2.size(); ++i) {
-            if (v1[i] != v2[i]) break;
-        }
+        // int i;
+        // for (i = 0; i < v1.size() && i < v2.size(); ++i) {
+        //     if (v1[i] != v2[i]) break;
+        // }
 
-        // i-1 will be the index of the last common ancestor in the paths
-        return new TreeNode(v1[i-1]);
+        // // i-1 will be the index of the last common ancestor in the paths
+        // return new TreeNode(v1[i-1]);
+
+
+        // optimal solution 
+        if (root == NULL || root == p || root == q) {
+            return root;
+        }
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);
+
+        //result
+        if(left == NULL) {
+            return right;
+        }
+        else if(right == NULL) {
+            return left;
+        }
+        else { //both left and right are not null, we found our result
+            return root;
+        }
     }
 };
