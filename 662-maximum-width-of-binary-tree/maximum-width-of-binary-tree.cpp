@@ -57,11 +57,11 @@ public:
         
         while (!q.empty()) {
             int size = q.size();
-            unsigned long long mmin = q.front().second; // To prevent overflow
+            // unsigned long long mmin = q.front().second; // To prevent overflow
             unsigned long long first, last;
             
             for (int i = 0; i < size; ++i) {
-                unsigned long long curr_i = q.front().second - mmin;
+                unsigned long long curr_i = q.front().second ;
                 TreeNode* node = q.front().first;
                 q.pop();
                 
