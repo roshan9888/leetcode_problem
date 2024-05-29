@@ -12,7 +12,7 @@
 class Solution {
 public: 
     TreeNode* build(vector<int>&preorder,int prestart,int prend,vector<int>&inorder,int instart,int inend,unordered_map<int,int>&mp){
-        if(prestart>prend && instart>inend){
+        if(prestart>prend || instart>inend){
             return nullptr;
         }
         
