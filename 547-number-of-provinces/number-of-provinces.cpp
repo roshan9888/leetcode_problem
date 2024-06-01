@@ -5,7 +5,6 @@ public:
         for(auto it:adj[node]){
             if(!vis[it]){
                 traverse(it,adj,vis);
-                vis[it]=1;
             }
         }
     }
