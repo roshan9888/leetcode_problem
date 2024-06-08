@@ -10,10 +10,6 @@ public:
                 j++;
             }
         }
-        // int zero=nums.size()-temp.size();
-        // for(int i=temp.size();i<nums.size();i++){
-        //     nums[i]=0;
-        // }
         for(int i=0;i<temp.size();i++){
             nums[i]=temp[i];
         }
