@@ -19,12 +19,10 @@ public:
         int i=0;
         int j=1;
         int sum=0;
-        // int mini=0;
-        // int maxi=0;
         while(i<j && j<n){
             int mini=prices[i];
             int maxi=prices[j];
-            if(i<j && mini<=maxi){
+            if(mini<=maxi){
                 sum=max(sum,maxi-mini);
                 j++;
             }
