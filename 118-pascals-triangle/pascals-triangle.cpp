@@ -12,5 +12,13 @@ public:
             }
         }
         return r;
+        //time complexity O(n^2)
+
+        // for calculating the value of a given position 
+        // use the formula NcK
+        // for(int i=0;i<k;i++){
+        //     res*=(n-i);
+        //     res/=(i+1);
+        // }
     }
 };
