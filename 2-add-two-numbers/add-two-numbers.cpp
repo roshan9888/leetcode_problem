@@ -19,9 +19,6 @@ public:
         return newhead;
     }
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        // ListNode*reverseHead1=reverse(l1);
-        // ListNode*reverseHead2=reverse(l2);
-
         ListNode*newhead=new ListNode();
         ListNode*temp=newhead;
         int carry=0;
@@ -42,7 +39,6 @@ public:
             temp -> next = node; 
             temp = temp -> next; 
         }
-        // ListNode*result=reverse(newhead->next);
         return newhead->next;
     }
 };
