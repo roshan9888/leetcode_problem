@@ -1,33 +1,39 @@
 class Solution {
 public:
-   
-   void solve(vector<string>&ans,int n,int used_open,int used_close,int rem_open,int rem_close,string output){
-       if(rem_open==0 && rem_close==0){
-           ans.push_back(output);
-           return;
-       }
+    void generate(int n,int open,int close,vector<string>&ans,string temp){
+        // if(open==n){
+        //     while(close<n){
+        //         temp+=')';
+        //         close++;
+        //     }
+        //     ans.push_back(temp);
+        //     return;
+        // }
 
-       if(rem_open>0){
-         output.push_back('(');
-         solve(ans,n,used_open+1,used_close,rem_open-1,rem_close,output);
-         output.pop_back();
-       }
+        // if(open>close){
+        //     generate(n,open+1,close,ans,temp+'(');
+        //     generate(n,open,close+1,ans,temp+')');
+        // }
+        // else{
+        //     generate(n,open,close+1,ans,temp+')');
+        // }
 
-       if(used_open>used_close){
-           output.push_back(')');
-           solve(ans,n,used_open,used_close+1,rem_open,rem_close-1,output);
-           output.pop_back();
-       }
-   } 
+        if (open == n && close == n) {
+            ans.push_back(temp);
+            return;
+        }
 
+        if (open < n) {
+            generate(n, open + 1, close, ans, temp + '(');
+        }
+
+        if (close < open) {
+            generate(n, open, close + 1, ans, temp + ')');
+        }
+    }
     vector<string> generateParenthesis(int n) {
-        vector<string> ans;
-        int used_open=0;
-        int used_close=0;
-        int rem_open=n;
-        int rem_close=n;
-        string output="";
-        solve(ans,n,used_open,used_close,rem_open,rem_close,output);
+        vector<string>ans;
+        generate(n,0,0,ans,"");
         return ans;
     }
 };
