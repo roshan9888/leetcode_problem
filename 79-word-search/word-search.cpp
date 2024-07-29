@@ -1,44 +1,34 @@
 class Solution {
 public:
-    int l, m, n;
-    vector<vector<int>> directions{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-    bool find(vector<vector<char>>& board, int i, int j, string &word, int idx) {
-        if(idx >= l)
+    bool search(string word,int ind,vector<vector<char>>&board,int i,int j){
+        if(ind==word.size()){
             return true;
-        
-        if(i < 0 || i >= m || j < 0 || j >= n || board[i][j] != word[idx])
-            return false;
-        
-        char temp = board[i][j];
-        board[i][j] = '$';
-        
-        for(auto& dir : directions) {
-            int i_ = i + dir[0];
-            int j_ = j + dir[1];
-            
-            if(find(board, i_, j_, word, idx+1))
-                return true;
         }
-        
-        board[i][j] = temp;
+
+        if(i<0 || j<0 || i==board.size() || j==board[0].size() || board[i][j]!=word[ind]){
+            return false;
+        }
+        bool a,b,c,d;
+        board[i][j]='$';
+        a=search(word,ind+1,board,i+1,j);
+        b=search(word,ind+1,board,i-1,j);
+        c=search(word,ind+1,board,i,j+1);
+        d=search(word,ind+1,board,i,j-1);
+        board[i][j]=word[ind];
+
+        if(a || b || c || d) return true;
         return false;
     }
-    
     bool exist(vector<vector<char>>& board, string word) {
-        m = board.size();
-        n = board[0].size();
-        l = word.length();
-        if(m*n < l)
-            return false;
-        
-        for(int i = 0; i<m; i++) {
-            for(int j = 0; j<n; j++) {
-                if(board[i][j] == word[0] && find(board, i, j, word, 0)) {
-                    return true;
+        for(int i=0;i<board.size();i++){
+            for(int j=0;j<board[i].size();j++){
+                bool x=false;
+                if(board[i][j]==word[0]){
+                    x=search(word,0,board,i,j);
                 }
+                if(x) return true;
             }
         }
-        
         return false;
     }
 };
