@@ -6,7 +6,7 @@ public:
         }
 
         for(int i=ind;i<nums.size();i++){
-            if(ind!=i && nums[i]==nums[i-1]) continue;
+            // if(ind!=i && nums[i]==nums[i-1]) continue;
             temp.push_back(nums[i]);
             solve(nums,i+1,target-nums[i],k,ans,temp);
             temp.pop_back();
