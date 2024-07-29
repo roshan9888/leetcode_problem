@@ -1,31 +1,22 @@
 class Solution {
 public:
-    void combination(vector<int>&candidates,int target,vector<vector<int>>&ans,vector<int>&v,int index,int k){
-        if(target==0){
-            if(v.size()==k){
-       ans.push_back(v);
+    void solve(vector<int>&nums,int ind,int target,int k,vector<vector<int>>&ans,vector<int>temp){
+        if(target==0 && temp.size()==k){
+            ans.push_back(temp);
+        }
 
-            }
-        return;
-    }
-    if(target<0){
-        return;
-    }
-
-    for(int i=index;i<candidates.size();i++){
-        v.push_back(candidates[i]);
-        combination(candidates,target-candidates[i],ans,v,i+1,k);
-        v.pop_back();
-    }
+        for(int i=ind;i<nums.size();i++){
+            if(ind!=i && nums[i]==nums[i-1]) continue;
+            temp.push_back(nums[i]);
+            solve(nums,i+1,target-nums[i],k,ans,temp);
+            temp.pop_back();
+        }
     }
     vector<vector<int>> combinationSum3(int k, int n) {
-        vector<int>candidates;
-        for(int i=1;i<=9;i++){
-            candidates.push_back(i);
-        }
+        vector<int>nums{1,2,3,4,5,6,7,8,9};
         vector<vector<int>>ans;
-        vector<int>v;
-       combination(candidates,n,ans,v,0,k);
-       return ans;
+        vector<int>temp;
+        solve(nums,0,n,k,ans,temp);
+        return ans;
     }
 };
