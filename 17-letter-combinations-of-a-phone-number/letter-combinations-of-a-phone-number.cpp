@@ -5,7 +5,7 @@ public:
             ans.push_back(temp);
             return;
         }
-        
+
         string s=mapping[digits[ind]-'0'];
         for(int i=0;i<s.size();i++){
             temp.push_back(s[i]);
