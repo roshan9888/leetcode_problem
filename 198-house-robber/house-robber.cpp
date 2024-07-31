@@ -33,6 +33,24 @@ public:
         }
         return dp[ind];
     }
+
+    int space(int ind,vector<int>&nums){
+        if(ind==0) return nums[0];
+        int prev=nums[0];
+        int prev2,curr;
+        for(int i=1;i<=ind;i++){
+            int pick=nums[i];
+            if(i>1) pick+=prev2;
+            int notpick=prev;
+
+            curr=max(pick,notpick);
+
+            prev2=prev;
+            prev=curr;
+        }
+        return curr;
+    }
+
     int rob(vector<int>& nums) {
         int n=nums.size();
         // return solve(n-1,nums);
@@ -42,7 +60,10 @@ public:
         // return topdown(n-1,nums,dp);
         
         //bottom up dp
-        vector<int>dp(n+1,0);
-        return bottomup(n-1,nums,dp);
+        // vector<int>dp(n+1,0);
+        // return bottomup(n-1,nums,dp);
+
+        //space
+        return space(n-1,nums);
     }
 };
