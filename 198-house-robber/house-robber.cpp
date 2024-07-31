@@ -21,12 +21,28 @@ public:
         return dp[ind]=max(pick,notpick);
     }
 
+    int bottomup(int ind,vector<int>&nums,vector<int>&dp){
+        dp[0]=nums[0];
+         
+        for(int i=1;i<=ind;i++){
+            int pick=nums[i];
+            if(i>1) pick+=dp[i-2];
+            int notpick=dp[i-1];
+
+            dp[i]=max(pick,notpick);
+        }
+        return dp[ind];
+    }
     int rob(vector<int>& nums) {
         int n=nums.size();
         // return solve(n-1,nums);
 
         //top down dp
-        vector<int>dp(n+1,-1);
-        return topdown(n-1,nums,dp);
+        // vector<int>dp(n+1,-1);
+        // return topdown(n-1,nums,dp);
+        
+        //bottom up dp
+        vector<int>dp(n+1,0);
+        return bottomup(n-1,nums,dp);
     }
 };
