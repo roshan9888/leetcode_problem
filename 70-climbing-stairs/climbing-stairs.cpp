@@ -29,7 +29,21 @@ public:
             dp[i]=dp[i-1]+dp[i-2];
         }
     }
+     
+    int space(int n){
+        if(n==1) return 1;
+        int prev2=1;
+        int prev=1;
+        
+        int curr=0;
+        for(int i=2;i<=n;i++){
+            curr=prev2+prev;
+            prev2=prev;
+            prev=curr;
+        }
 
+        return curr;
+    }
     int climbStairs(int n) {
         // int count=0;
         // return solve(n,count);
@@ -38,9 +52,12 @@ public:
         // vector<int>dp(n+1,-1);
         // return topdown(n,dp);
 
-        //botto up dp
-        vector<int>dp(n+1,-1);
-        bottomup(n,dp);
-        return dp[n];
+        //bottom up dp
+        // vector<int>dp(n+1,-1);
+        // bottomup(n,dp);
+        // return dp[n];
+
+        //space complexity
+        return space(n);
     }
 };
