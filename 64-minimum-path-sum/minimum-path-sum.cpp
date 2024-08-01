@@ -36,7 +36,6 @@ public:
     }
     
     int bottomup(int m,int n,vector<vector<int>>&grid,vector<vector<int>>&dp){
-        int mini=0;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(i==0 && j==0) dp[0][0]=grid[0][0];
@@ -45,10 +44,26 @@ public:
                   int up=i>0?grid[i][j]+dp[i-1][j]:INT_MAX;
                   dp[i][j]=min(left,up);
                 }
-                
             }
         }
         return dp[m-1][n-1];
+    }
+
+    int space(int m,int n,vector<vector<int>>&grid){
+        vector<int>prev(n,0);
+        for(int i=0;i<m;i++){
+            vector<int>curr(n,0);
+            for(int j=0;j<n;j++){
+                if(i==0 && j==0) curr[0]=grid[0][0];
+                else{
+                  int left=j>0?grid[i][j]+curr[j-1] : INT_MAX;
+                  int up=i>0?grid[i][j]+prev[j]:INT_MAX;
+                  curr[j]=min(left,up);
+                }
+            }
+            prev=curr;
+        }
+        return prev[n-1];
     }
 
     int minPathSum(vector<vector<int>>& grid) {
@@ -61,7 +76,10 @@ public:
         // return topdown(m-1,n-1,grid,dp);
 
         //bottomup dp
-        vector<vector<int>>dp(m,vector<int>(n,0));
-        return bottomup(m,n,grid,dp);
+        // vector<vector<int>>dp(m,vector<int>(n,0));
+        // return bottomup(m,n,grid,dp);
+
+        //space 
+        return space(m,n,grid);
     }
 };
