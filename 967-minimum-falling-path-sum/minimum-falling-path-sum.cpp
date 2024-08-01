@@ -60,7 +60,7 @@ public:
                 }
 
                 int rightdi;
-                if(j+1<matrix[0].size()){
+                if(j+1<=n){
                     rightdi=matrix[i][j]+dp[i-1][j+1];
                 }
                 else{
