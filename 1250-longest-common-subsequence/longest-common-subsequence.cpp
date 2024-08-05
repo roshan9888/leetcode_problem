@@ -25,6 +25,20 @@ public:
         }
         return dp[n][m];
     }
+    
+    int space(int n,int m,string &s1,string &s2){
+        vector<int>prev(m+1,0),curr(m+1,0);
+
+        for(int i=0;i<=m;i++) prev[i]=0;
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                if(s1[i-1]==s2[j-1]) curr[j]=1+prev[j-1];
+                else curr[j]=max(prev[j],curr[j-1]);
+            }
+            prev=curr;
+        }
+        return prev[m];
+    }
 
     int longestCommonSubsequence(string text1, string text2) {
         int n=text1.size();
@@ -35,9 +49,11 @@ public:
         // vector<vector<int>>dp(n,vector<int>(m,-1));
         // return topdown(n-1,m-1,text1,text2,dp);
 
-        vector<vector<int>>dp(n+1,vector<int>(m+1,0));
-        for(int i=0;i<=n;i++) dp[i][0]=0;
-        for(int j=0;j<=m;j++) dp[0][j]=0;
-        return bottomup(n,m,text1,text2,dp);
+        // vector<vector<int>>dp(n+1,vector<int>(m+1,0));
+        // for(int i=0;i<=n;i++) dp[i][0]=0;
+        // for(int j=0;j<=m;j++) dp[0][j]=0;
+        // return bottomup(n,m,text1,text2,dp);
+
+        return space(n,m,text1,text2);
     }
 };
