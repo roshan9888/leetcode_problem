@@ -36,12 +36,43 @@ public:
         return false;
     }
 
+    bool bottomup(int n,int m,string &s,string &p,vector<vector<bool>>&dp){
+        dp[0][0]=true; 
+        for(int i=1;i<=n;i++){
+            dp[i][0]=false;
+        }
+        for(int j=1;j<=m;j++){
+            bool flag=true;
+            for(int i=1;i<=j;i++){
+                if(p[i-1]!='*'){
+                    flag=false;
+                    break;
+                }
+            }
+            dp[0][j]=flag;
+        }
+
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+        if(s[i-1]==p[j-1] || p[j-1]=='?'){
+            dp[i][j]=dp[i-1][j-1];
+        }
+        else if(p[j-1]=='*') dp[i][j]=dp[i-1][j] | dp[i][j-1];
+        else dp[i][j]=false;
+        }
+        }
+        return dp[n][m];
+    }
+
     bool isMatch(string s, string p) {
         int n=s.size();
         int m=p.size();
         // return solve(n-1,m-1,s,p);
 
-        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
-        return topdown(n-1,m-1,s,p,dp);
+        // vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+        // return topdown(n-1,m-1,s,p,dp);
+
+        vector<vector<bool>>dp(n+1,vector<bool>(m+1,false));
+        return bottomup(n,m,s,p,dp);
     }
 };
