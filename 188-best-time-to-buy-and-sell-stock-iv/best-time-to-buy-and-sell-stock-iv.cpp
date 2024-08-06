@@ -24,15 +24,32 @@ public:
         }
         return dp[ind][buy][count]=profit;
     }
+     
+    int bottomup(int n,vector<int>&prices,int buy,int k,vector<vector<vector<int>>>&dp){
+        for(int ind=n-1;ind>=0;ind--){
+            for(int buy=0;buy<=1;buy++){
+                for(int count=1;count<=k;count++){
+                    long profit=0;
+                        if(buy){
+                        dp[ind][buy][count]=max((-prices[ind]+dp[ind+1][0][count]),(dp[ind+1][1][count]));
+                        }else{
+                        dp[ind][buy][count]=max((prices[ind]+dp[ind+1][1][count-1]),(dp[ind+1][0][count]));
+                        }
+                    }
+                }
+            }
+        return dp[0][1][k];    
+    }
 
     int maxProfit(int k, vector<int>& prices) {
         int n=prices.size();
         // return solve(0,prices,1,k);
 
         //topdown dp
-        vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(2,vector<int>(k+1,-1)));
-        return topdown(0,prices,1,k,dp);
+        // vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(2,vector<int>(k+1,-1)));
+        // return topdown(0,prices,1,k,dp);
 
-
+        vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(2,vector<int>(k+1,0)));
+        return bottomup(n,prices,1,k,dp);
     }
 };
