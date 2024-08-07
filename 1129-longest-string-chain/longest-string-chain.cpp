@@ -1,5 +1,5 @@
 bool cmp(string&s1,string&s2){
-        return s1.size()<s2.size();
+    return s1.size()<s2.size();
 } 
 class Solution {
 public:
