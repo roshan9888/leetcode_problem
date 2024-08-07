@@ -16,7 +16,7 @@ public:
                 ans=max(ans,dp[i][j]);
             }
         }
-        return a.size()-ans+b.size()-ans;
+        return a.size()+b.size()-2*ans;
     }
 
     int minDistance(string word1, string word2) {
