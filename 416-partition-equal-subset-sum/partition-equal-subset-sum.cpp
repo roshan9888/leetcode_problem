@@ -26,6 +26,24 @@ public:
         
         return dp[ind][target]=take|nottake;
     }
+    
+    bool bottomup(int n,int target,vector<int>&arr,vector<vector<int>>&dp){
+        for(int i=0;i<n;i++) dp[i][0]=true;
+        if(arr[0]<=target) dp[0][arr[0]]=true;
+        
+        for(int ind=1;ind<n;ind++){
+            for(int t=0;t<=target;t++){
+                bool nottake=dp[ind-1][t];
+                bool take=false;
+                if(arr[ind]<=t){
+                    take=dp[ind-1][t-arr[ind]];
+                }
+                dp[ind][t]=take|nottake;
+            }
+        }
+        return dp[n-1][target];
+        
+    }
 
     bool canPartition(vector<int>& nums) {
         int sum=0;
@@ -36,7 +54,10 @@ public:
         int target=sum/2;
         // return solve(nums.size()-1,target,nums);
 
-        vector<vector<int>>dp(nums.size(),vector<int>(target+1,-1));
-        return topdown(nums.size()-1,target,nums,dp);
+        // vector<vector<int>>dp(nums.size(),vector<int>(target+1,-1));
+        // return topdown(nums.size()-1,target,nums,dp);
+
+        vector<vector<int>>dp(nums.size(),vector<int>(target+1,0));
+        return bottomup(nums.size(),target,nums,dp);
     }
 };
