@@ -63,10 +63,10 @@ public:
         // vector<vector<int>>dp(m,vector<int>(n,-1));
         // return topdown(m-1,n-1,dp);
 
-        // vector<vector<int>>dp(m,vector<int>(n,0));
-        // return bottomup(m,n,dp);
+        vector<vector<int>>dp(m,vector<int>(n,0));
+        return bottomup(m,n,dp);
 
         //space 
-        return space(m,n);
+        // return space(m,n);
     }
 };
