@@ -21,6 +21,22 @@ public:
         return dp[i][j]=mini;
     }
 
+    int bottomup(int n,int c,vector<int>&cuts,vector<vector<int>>&dp){
+       
+        for(int i=c;i>=1;i--){
+            for(int j=1;j<=c;j++){
+                int mini=INT_MAX;
+                if(i>j) continue;
+                for(int ind=i;ind<=j;ind++){
+                int cost=cuts[j+1]-cuts[i-1]+dp[i][ind-1]+dp[ind+1][j];
+                mini=min(cost,mini);
+                }
+                dp[i][j]=mini;
+            }
+        }
+        return dp[1][c];
+    }
+
     int minCost(int n, vector<int>& cuts) {
         int c=cuts.size();
         cuts.push_back(n);
@@ -29,7 +45,11 @@ public:
         // return solve(1,c,cuts);
 
         //top down dp
-        vector<vector<int>>dp(c+1,vector<int>(c+1,-1));
-        return topdown(1,c,cuts,dp);
+        // vector<vector<int>>dp(c+1,vector<int>(c+1,-1));
+        // return topdown(1,c,cuts,dp);
+        
+        //bottom up dp
+        vector<vector<int>>dp(c+2,vector<int>(c+2,0));
+        return bottomup(n,c,cuts,dp);
     }
 };
