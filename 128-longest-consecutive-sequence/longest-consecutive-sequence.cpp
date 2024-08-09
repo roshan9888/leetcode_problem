@@ -1,24 +1,42 @@
 class Solution {
-public:
+public: 
+    bool isPresent(int x,vector<int>&nums){
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==x) return true;
+        }
+        return false;
+    }
     int longestConsecutive(vector<int>& nums) {
         //brute force
         // using two for loop
+        // if(nums.size()==0) return 0;
+        // int longest=1;
+        // for(int i=0;i<nums.size();i++){
+        //     int x=nums[i];
+        //     int cnt=1;
+        //     while(isPresent(x+1,nums)==true){
+        //         x=x+1;
+        //         cnt++;
+        //     }
+        //     longest=max(longest,cnt);
+        // }
+        // return longest;
         // time complexity O(n^2)
 
         //better solution
         // if(nums.size()==0) return 0;
-        // sort(nums.begin(),nums.end());
-        // int count=0;
         // int longest=1;
-        // int lastsmaller=INT_MIN;
+        // int count=0;
+        // sort(nums.begin(),nums.end());
+        // int lsmaller=INT_MIN;
         // for(int i=0;i<nums.size();i++){
-        //     if(nums[i]-1==lastsmaller){
+        //     if(nums[i]-1==lsmaller){
         //         count++;
-        //         lastsmaller=nums[i];
+        //         lsmaller=nums[i];
         //     }
-        //     else if(nums[i]!=lastsmaller){
+        //     else if(nums[i]!=lsmaller){
         //         count=1;
-        //         lastsmaller=nums[i];
+        //         lsmaller=nums[i];
         //     }
         //     longest=max(longest,count);
         // }
