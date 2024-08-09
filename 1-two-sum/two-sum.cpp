@@ -17,42 +17,42 @@ public:
 
     //   return {0,0};
 
-    //better
-    map<int,int>mp;
-    for(int i=0;i<nums.size();i++){
-        int a=nums[i];
-        int b=target-a;
-        if(mp.find(b)!=mp.end()){
-            return {mp[b],i};
-        }
-        mp[a]=i;
-    }
-    return {-1,-1};
+    //better.  O(n^2) when use unordered_map in worst case || O(nlogn) when use ordered_map
+    // map<int,int>mp;
+    // for(int i=0;i<nums.size();i++){
+    //     int a=nums[i];
+    //     int b=target-a;
+    //     if(mp.find(b)!=mp.end()){
+    //         return {mp[b],i};
+    //     }
+    //     mp[a]=i;
+    // }
+    // return {-1,-1};
 
     //optimal solution
-    //     vector<pair<int,int>>data;
-    //     for(int i=0;i<nums.size();i++){
-    //         int value=nums[i];
-    //         int index=i;
-    //         data.push_back({value,index});
-    //     }
-    //     sort(data.begin(),data.end(),cmp);
-    // int start=0;
-    // int end=nums.size()-1;
-    // vector<int>ans;
-    // while(start<end){
-    //     if(data[start].first + data[end].first == target){
-    //         ans.push_back(data[start].second);
-    //         ans.push_back(data[end].second);
-    //         break;
-    //     }
-    //     else if(data[start].first + data[end].first < target){
-    //         start++;
-    //     }
-    //     else{
-    //         end--;
-    //     }
-    // }
-    // return ans;
+    vector<pair<int,int>>data;
+    vector<int>ans;
+    for(int i=0;i<nums.size();i++){
+        int value=nums[i];
+        int ind=i;
+        data.push_back({value,ind});
+    }
+    sort(data.begin(),data.end(),cmp);
+    int start=0;
+    int end=nums.size()-1;
+    while(start<end){
+        if(data[start].first+data[end].first==target){
+            ans.push_back(data[start].second);
+            ans.push_back(data[end].second);
+            break;
+        }
+        else if(data[start].first+data[end].first<target){
+            start++;
+        }
+        else{
+            end--;
+        }
+    }
+    return ans;
     }
 };
