@@ -17,32 +17,42 @@ public:
 
     //   return {0,0};
 
-
-
-         //optimal solution
-        vector<pair<int,int>>data;
-        for(int i=0;i<nums.size();i++){
-            int value=nums[i];
-            int index=i;
-            data.push_back({value,index});
+    //better
+    map<int,int>mp;
+    for(int i=0;i<nums.size();i++){
+        int a=nums[i];
+        int b=target-a;
+        if(mp.find(b)!=mp.end()){
+            return {mp[b],i};
         }
-        sort(data.begin(),data.end(),cmp);
-    int start=0;
-    int end=nums.size()-1;
-    vector<int>ans;
-    while(start<end){
-        if(data[start].first + data[end].first == target){
-            ans.push_back(data[start].second);
-            ans.push_back(data[end].second);
-            break;
-        }
-        else if(data[start].first + data[end].first < target){
-            start++;
-        }
-        else{
-            end--;
-        }
+        mp[a]=i;
     }
-    return ans;
+    return {-1,-1};
+
+    //optimal solution
+    //     vector<pair<int,int>>data;
+    //     for(int i=0;i<nums.size();i++){
+    //         int value=nums[i];
+    //         int index=i;
+    //         data.push_back({value,index});
+    //     }
+    //     sort(data.begin(),data.end(),cmp);
+    // int start=0;
+    // int end=nums.size()-1;
+    // vector<int>ans;
+    // while(start<end){
+    //     if(data[start].first + data[end].first == target){
+    //         ans.push_back(data[start].second);
+    //         ans.push_back(data[end].second);
+    //         break;
+    //     }
+    //     else if(data[start].first + data[end].first < target){
+    //         start++;
+    //     }
+    //     else{
+    //         end--;
+    //     }
+    // }
+    // return ans;
     }
 };
