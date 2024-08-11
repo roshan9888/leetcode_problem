@@ -1,31 +1,40 @@
 class Solution {
 public:
-    long long func(vector<int>&nums,int mid){
-        int thre=0;
+    bool ispossible(vector<int>&nums,int div,int threshold){
+        int cnt=0;
         for(int i=0;i<nums.size();i++){
-            thre+=ceil(ceil(nums[i])/ceil(mid));
-            // cout<<thre<<" ";
+            cnt+=ceil((double)nums[i]/(double)(div));
         }
-        // cout<<thre<<" ";
-        return thre;
+        return cnt<=threshold;
     }
+
     int smallestDivisor(vector<int>& nums, int threshold) {
-        int mini=1;
+        //brute force
+        // int maxi=INT_MIN;
+        // for(int i=0;i<nums.size();i++){
+        //     maxi=max(maxi,nums[i]);
+        // }
+        // for(int i=1;i<=maxi;i++){
+        //     if(ispossible(nums,i,threshold)){
+        //         return i;
+        //     }
+        // }
+        // return -1;
+
+        //optimal solution
+        int low=1;
         int maxi=INT_MIN;
         for(int i=0;i<nums.size();i++){
-            // mini=min(mini,nums[i]);
             maxi=max(maxi,nums[i]);
         }
-        int low=mini;
         int high=maxi;
         while(low<=high){
             int mid=(low+high)/2;
-            long long midn=func(nums,mid);
-            if(midn>threshold){
-                low=mid+1;
+            if(ispossible(nums,mid,threshold)){
+                high=mid-1;
             }
             else{
-                high=mid-1;
+                low=mid+1;
             }
         }
         return low;
