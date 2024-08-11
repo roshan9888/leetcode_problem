@@ -1,43 +1,28 @@
 class Solution {
 public:
-    int binarysearchleft(vector<int>& nums,int low,int high,int target){
-        while(low<=high){
-            int mid=low+(high-low)/2;
-            if(nums[mid]<target){
-                low=mid+1;
-            }
-            else{
-                high=mid-1;
-            }
-        }
-        return low;
-    }
-
-    int  binarysearchright(vector<int>& nums,int low,int high,int target){
-        while(low<=high){
-            int mid=low+(high-low)/2;
-            if(nums[mid]<=target){
-                low=mid+1;
-            }
-            else{
-                high=mid-1;
-            }
-        }
-        return high;
-    }
     vector<int> searchRange(vector<int>& nums, int target) {
-        vector<int>ans;
-        int n=nums.size();
-        int left=binarysearchleft(nums,0,n-1,target);
-        int right=binarysearchright(nums,0,n-1,target);
-
-        if(left<=right){
-            ans.push_back(left);
-            ans.push_back(right);
+        int i=0;
+        int fo=-1;
+        int lo=-1;
+        while(i<nums.size()){
+            if(nums[i]==target){
+                fo=i;
+                lo=i;
+                break;
+            }
+            i++;
         }
-        else{
-            return {-1,-1};
+        cout<<i<<" ";
+        i++;
+        while(i<nums.size()){
+            cout<<"hi"<<" ";
+            if(nums[i]==target){
+                lo=i;
+            }
+            i++;
         }
-        return ans;
+        cout<<fo<<" ";
+        cout<<lo<<" ";
+        return {fo,lo};
     }
 };
