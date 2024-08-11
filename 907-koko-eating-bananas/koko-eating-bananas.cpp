@@ -1,11 +1,11 @@
 class Solution {
 public:
-    long long func(vector<int>&piles,int k){
-        long long totaltime=0;
+    long long int func(vector<int>&piles,int k){
+        long long time=0;
         for(int i=0;i<piles.size();i++){
-            totaltime+=ceil((double)piles[i]/(double)(k));
+            time+=ceil((double)piles[i]/(double)(k));
         }
-        return totaltime;
+        return time;
     }
     int minEatingSpeed(vector<int>& piles, int h) {
         int maxi=INT_MIN;
@@ -15,9 +15,10 @@ public:
         int low=1;
         int high=maxi;
         while(low<=high){
-            long long mid=(low+high)/2;
-            long long m=func(piles,mid);
-            if(m<=h){
+            int mid=(low+high)/2;;
+
+            long long int midn=func(piles,mid);
+            if(midn<=h){
                 high=mid-1;
             }
             else{
