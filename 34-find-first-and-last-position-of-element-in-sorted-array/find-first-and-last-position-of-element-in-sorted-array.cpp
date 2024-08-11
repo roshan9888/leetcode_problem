@@ -12,17 +12,12 @@ public:
             }
             i++;
         }
-        cout<<i<<" ";
-        i++;
         while(i<nums.size()){
-            cout<<"hi"<<" ";
             if(nums[i]==target){
                 lo=i;
             }
             i++;
         }
-        cout<<fo<<" ";
-        cout<<lo<<" ";
         return {fo,lo};
     }
 };
