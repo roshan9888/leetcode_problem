@@ -27,10 +27,7 @@ public:
         if (str.length() >= 2) {  // Ensure the string has at least two characters
             sub += str.substr(1, str.length() - 2);
             // cout << "Substring without first and last character of " << str << ": " << sub << endl;
-        } else {
-            // cout << "String \"" << str << "\" has less than 2 characters." << endl;
-            sub+=str;
-        }
+        } 
     }
         return sub;
     }
