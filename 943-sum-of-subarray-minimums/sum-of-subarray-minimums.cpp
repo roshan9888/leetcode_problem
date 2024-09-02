@@ -1,13 +1,14 @@
 class Solution {
 public:
-    // int find_min(vector<int>temp){
-    //     int mini=INT_MAX;
-    //     for(int i=0;i<temp.size();i++){
-    //         mini=min(mini,temp[i]);
-    //     }
-    //     return mini;
-    // }
-    int sumSubarrayMins(vector<int>& arr) {
+    int find_min(vector<int>temp){
+        int mini=INT_MAX;
+        for(int i=0;i<temp.size();i++){
+            mini=min(mini,temp[i]);
+        }
+        return mini;
+    }
+
+    int sumSubarrayMins(vector<int>& arr){
         //brute force 
         // int sum=0;
         // for(int start=0;start<arr.size();start++){
