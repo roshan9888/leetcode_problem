@@ -40,8 +40,8 @@ public:
         int ele;
         for(int i=0;i<nums.size();i++){
             if(count==0){
-                count++;
                 ele=nums[i];
+                count++;
             }
             else if(nums[i]==ele){
                 count++;
