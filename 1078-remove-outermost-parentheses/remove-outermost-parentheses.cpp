@@ -1,34 +1,52 @@
 class Solution {
 public:
     string removeOuterParentheses(string s) {
-        stack<char>st;
-        vector<string>v;
-        string temp="";
-        for(int i=0;i<s.size();i++){
-            if(st.empty()){
-                st.push(s[i]);
-                temp+=s[i];
-            }
-            else if(st.top()=='(' && s[i]==')'){
-                st.pop();
-                temp+=s[i];
+        // stack<char>st;
+        // vector<string>v;
+        // string temp="";
+        // for(int i=0;i<s.size();i++){
+        //     if(st.empty()){
+        //         st.push(s[i]);
+        //         temp+=s[i];
+        //     }
+        //     else if(st.top()=='(' && s[i]==')'){
+        //         st.pop();
+        //         temp+=s[i];
+        //     }
+        //     else{
+        //         st.push(s[i]);
+        //         temp+=s[i];
+        //     }
+        //     if(st.empty()){
+        //         v.push_back(temp);
+        //         temp="";
+        //     }
+        // }
+
+        // string ans="";
+        // for(auto it:v){
+        //     if(it.length()>=2){
+        //         ans+=it.substr(1,it.length()-2);
+        //     }
+        // }
+        // return ans;
+
+        string result="";
+        int level=0;
+        for(char c:s){
+            if(c=='('){
+                if(level>0){
+                    result+=c;
+                }
+                level++;
             }
             else{
-                st.push(s[i]);
-                temp+=s[i];
-            }
-            if(st.empty()){
-                v.push_back(temp);
-                temp="";
+                level--;
+                if(level>0){
+                    result+=c;
+                }
             }
         }
-
-        string ans="";
-        for(auto it:v){
-            if(it.length()>=2){
-                ans+=it.substr(1,it.length()-2);
-            }
-        }
-        return ans;
+        return result;
     }
 };
