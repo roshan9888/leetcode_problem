@@ -10,8 +10,6 @@
  */
 class Solution {
 public:
-    
-
     ListNode* findmid(ListNode* head){
         // if(head && head->next) return head;
 
@@ -24,31 +22,27 @@ public:
         return slow;
     }
 
-    ListNode* merge(ListNode* list1, ListNode* list2) {
-        if(list1==0) return list2;
-        if(list2==0) return list1;
-        ListNode* list3=new ListNode(-1);
-        ListNode* mptr=list3;
-        while(list1 && list2){
-            if(list1->val <= list2->val){
-                mptr->next=list1;
-                mptr=list1;
-                list1=list1->next;
+    ListNode*merge(ListNode*left,ListNode*right){
+        if(left==0) return right;
+        if(right==0) return left;
+        ListNode*list3=new ListNode(-1);
+        ListNode*mptr=list3;
+        while(left && right){
+            if(left->val<=right->val){
+                mptr->next=left;
+                mptr=left;
+                left=left->next;
             }
             else{
-                mptr->next=list2;
-                mptr=list2;
-                list2=list2->next;
+                mptr->next=right;
+                mptr=right;
+                right=right->next;
             }
-            if(list1){
-                mptr->next=list1;
-                // mptr=list1;
-                // list1=list1->next;
+            if(left){
+                mptr->next=left;
             }
-            if(list2){
-                mptr->next=list2;
-                // mptr=list2;
-                // list2=list2->next;
+            if(right){
+                mptr->next=right;
             }
         }
         return list3->next;
@@ -56,14 +50,15 @@ public:
 
     ListNode* sortList(ListNode* head) {
         if(head==0 || head->next==0) return head;
-        ListNode* mid=findmid(head);
-        ListNode* left=head;
-        ListNode* right=mid->next;
-        mid->next=0;
 
+        ListNode*mid=findmid(head);
+        ListNode*left=head;
+        ListNode*right=mid->next;
+        mid->next=0;
         left=sortList(left);
         right=sortList(right);
-        ListNode* mergedLL=merge(left,right);
-        return mergedLL;
+        ListNode*mergeLL=merge(left,right);
+        return mergeLL;
+
     }
 };
