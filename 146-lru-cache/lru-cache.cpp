@@ -6,7 +6,6 @@ public:
     LRUCache(int capacity) {
         n=capacity;
     }
-    
     void makeRecentlyUsed(int key){
         dll.erase(mp[key].first);
         dll.push_front(key);
@@ -30,11 +29,12 @@ public:
             mp[key]={dll.begin(),value};
             n--;
         }
+
         if(n<0){
-            int key_to_Be_Deleted=dll.back();
-            mp.erase(key_to_Be_Deleted);
-            dll.pop_back();
-            n++;
+           int key_to_deleted=dll.back();
+           mp.erase(key_to_deleted);
+           dll.pop_back();
+           n++;
         }
     }
 };
