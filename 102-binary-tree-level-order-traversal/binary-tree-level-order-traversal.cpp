@@ -10,32 +10,31 @@
  * };
  */
 class Solution {
-public:
-    vector<vector<int>>levelordertraversal(TreeNode* root){
+public: 
+    vector<vector<int>>levelOrderTraversal(TreeNode*root){
         vector<vector<int>>ans;
         if(!root) return ans;
-        queue<TreeNode*> q;
-        q.push(root);
-        while (!q.empty()) {
-            vector<int> level; // Create a vector for each level
-            int size = q.size();
 
-            for (int i = 0; i < size; i++) {
-                TreeNode* node = q.front();
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty()){
+            vector<int>level;
+
+            int qsize=q.size();
+
+            for(int i=0;i<qsize;i++){
+                TreeNode* node=q.front();
+                level.push_back(node->val);
                 q.pop();
 
-                level.push_back(node->val);
-
-                if (node->left) q.push(node->left);
-                if (node->right) q.push(node->right);
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
             }
-
-            ans.push_back(level); // Push the level vector into ans
+            ans.push_back(level);
         }
         return ans;
     }
-    
     vector<vector<int>> levelOrder(TreeNode* root) {
-        return levelordertraversal(root);
+        return levelOrderTraversal(root);
     }
 };
