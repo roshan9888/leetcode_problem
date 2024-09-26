@@ -8,7 +8,8 @@
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
- */
+ */ 
+
 class Solution {
 public:
     int path(TreeNode*root,int &sum){
@@ -25,6 +26,7 @@ public:
 
         return (root->val)+max(left,right);
     }
+    
     int maxPathSum(TreeNode* root) {
         int sum=INT_MIN;
         path(root,sum);
