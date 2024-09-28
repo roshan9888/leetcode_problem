@@ -19,8 +19,8 @@ public:
             auto p=todo.front();
             todo.pop();
             TreeNode* node=p.first;
-            int x=p.second.first;
-            int y=p.second.second;
+            int x=p.second.first;  //vertical
+            int y=p.second.second;  //level
             nodes[x][y].insert(node->val);
             if(node->left){
                 todo.push({node->left,{x-1,y+1}});
