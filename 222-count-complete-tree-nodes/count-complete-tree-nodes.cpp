@@ -10,37 +10,19 @@
  * };
  */
 class Solution {
-public: 
-    int findleftheight(TreeNode*root){
-        int height=0;
-        while(root){
-           height++;
-           root=root->left;
-        }
-        return height;
+public:
+    void inordertraversal(TreeNode* root,int &count){
+        if(root==NULL) return;
+        inordertraversal(root->left,count);
+        cout<<root->val<<" ";
+        count++;
+        inordertraversal(root->right,count);
     }
-
-    int findrightheight(TreeNode*root){
-        int height=0;
-        while(root){
-            height++;
-            root=root->right;
-        }
-        return height;
-    }
-
-    int countnodes(TreeNode*root){
-        if(root==NULL) return 0;
-        int lh=findleftheight(root);
-        int rh=findrightheight(root);
-        if(lh==rh){
-            return (1<<lh)-1;
-        }
-        
-        return 1+countnodes(root->left) +countnodes(root->right);
-    }
-
     int countNodes(TreeNode* root) {
-        return countnodes(root);
+        if(!root) return 0;
+        if(!root->val) return 1;
+        int count=0;
+        inordertraversal(root,count);
+        return count;
     }
 };
