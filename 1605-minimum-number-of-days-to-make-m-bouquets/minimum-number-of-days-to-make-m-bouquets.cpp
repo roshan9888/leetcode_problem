@@ -64,12 +64,13 @@ public:
             int mid=(low+high)/2;
             // int m=func(bloomDay,mid,m,k);
             if(possible(bloomDay,mid,k,m)){
+                ans=mid;
                 high=mid-1;
             }
             else{
                 low=mid+1;
             }
         }
-        return low;
+        return ans;
     }
 };
