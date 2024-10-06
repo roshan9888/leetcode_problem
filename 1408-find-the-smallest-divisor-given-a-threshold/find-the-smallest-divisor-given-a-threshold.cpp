@@ -28,15 +28,17 @@ public:
             maxi=max(maxi,nums[i]);
         }
         int high=maxi;
+        int ans=-1;
         while(low<=high){
             int mid=(low+high)/2;
             if(ispossible(nums,mid,threshold)){
+                ans=mid;
                 high=mid-1;
             }
             else{
                 low=mid+1;
             }
         }
-        return low;
+        return ans;
     }
 };
