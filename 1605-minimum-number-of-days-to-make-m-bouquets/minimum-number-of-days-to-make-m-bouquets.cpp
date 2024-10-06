@@ -59,6 +59,7 @@ public:
         }
         int low=mini;
         int high=maxi;
+        int ans=-1;
         while(low<=high){
             int mid=(low+high)/2;
             // int m=func(bloomDay,mid,m,k);
