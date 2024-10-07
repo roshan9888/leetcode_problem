@@ -24,18 +24,21 @@ public:
         }
         int low=maxi;
         int high=sum;
+        int ans=-1;
         while(low<=high){
             int mid=(low+high)/2;
 
             int midn=func(weights,mid);
             // if(midn==days) return mid;
+            
             if(midn<=days){
+                ans=mid;
                 high=mid-1;
             }
             else{
                 low=mid+1;
             }
         }
-        return low;
+        return ans;
     }
 };
