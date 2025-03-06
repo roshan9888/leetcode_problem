@@ -1,53 +1,26 @@
 class Solution {
 public:
     vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
-        // map<int,int>mp;
-        // int n=grid.size();
-        // for(int i=0;i<grid.size();i++){
-        //     for(int j=0;j<grid.size();j++){
-        //         mp[grid[i][j]]++;
-        //     }
-        // }
-        // for(auto it:mp){
-        //     cout<<it.first<<" "<<it.second<<endl;
-        // }
-        // vector<int>ans;
-        // for(auto it:mp){
-        //    if(it.second>=2){
-        //        ans.push_back(it.first);
-        //    }
-        // }
-        // for(int i=1;i<=n*n;i++){
-        //    if(mp.find(i)==mp.end()){
-        //     ans.push_back(i);
-        // }
-        // }
-        // return ans;
+        int n = grid.size();
+        int missing = -1, repeat = -1;
 
-        //without using map
-        int n = grid.size(),sum=0;
-        vector<int> s;
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<grid[i].size();j++)
-            {
-                sum+=grid[i][j];
-                s.push_back(grid[i][j]);
+        // Store frequency of each number in the grid
+        unordered_map<int, int> freq;
+        for (auto& row : grid) {
+            for (int num : row) {
+                freq[num]++;
             }
         }
-        sort(s.begin(),s.end());
-        vector<int> ans(2);
-        for(int i=0;i<s.size();i++)
-        {
-            if(i>0&&s[i]==s[i-1])
-            {
-                ans[0]=s[i-1];
+
+        // Check numbers from 1 to n^2 to find missing and repeated values
+        for (int num = 1; num <= n * n; num++) {
+            if (!freq.count(num)) {
+                missing = num;  // Number not present in grid
+            } else if (freq[num] == 2) {
+                repeat = num;  // Number appears twice
             }
         }
-        int m=n*n,count=(m*(m+1))/2;
-        
-        ans[1]=count-(sum-ans[0]);
-       
-        return ans;
+
+        return {repeat, missing};
     }
 };
