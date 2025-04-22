@@ -17,7 +17,6 @@ public:
         int i=0;
         int j=nums.size()-1;
         vector<pair<int,int>>data;
-        vector<int>ans;
         for(int i=0;i<nums.size();i++){
             int value=nums[i];
             int ind=i;
