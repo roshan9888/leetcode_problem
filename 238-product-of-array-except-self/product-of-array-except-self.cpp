@@ -5,12 +5,15 @@ public:
         vector<int>output;
         if(n<1)
             return output;
-
+        
         int product=1;
         for(int i=0;i<n;i++){
             product*=nums[i];
             output.push_back(product);
-        }    
+        }  
+        for(int i=0;i<output.size();i++){
+            cout<<output[i]<<" ";
+        }  
         product=1;
         for(int i=n-1;i>0;i--){
             output[i]=output[i-1]*product;
