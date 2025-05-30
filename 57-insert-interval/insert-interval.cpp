@@ -4,6 +4,11 @@ public:
         intervals.push_back(newInterval);
         int n=intervals.size();
         sort(intervals.begin(),intervals.end());
+
+        // for(auto it:intervals){
+        //     cout<<it[0]<<it[1]<<" ";
+        // }
+
         vector<vector<int>>ans;
         for(int i=0;i<n;i++){
             if(ans.empty() || intervals[i][0]>ans.back()[1]){
