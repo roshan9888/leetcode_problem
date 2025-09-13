@@ -1,40 +1,44 @@
 class Solution {
 public:
+    bool top(int src,vector<vector<int>>&adj,vector<int>&vis,stack<int>&s){
+        vis[src]=1;
+        for(auto it:adj[src]){
+            if(vis[it]==0){
+                if(top(it,adj,vis,s)) return true;
+            }
+            else if(vis[it]==1){
+                return true;
+            }
+        }
+        vis[src]=2;
+        s.push(src);
+        return false;
+    }
+
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        vector<vector<int>>adj(numCourses);
-        for (const auto& prereq : prerequisites) {
-            adj[prereq[1]].push_back(prereq[0]);
-        }
-       
-        vector<int>indegree(numCourses,0);
-        for(int i=0;i<numCourses;i++){
-            for(auto it:adj[i]){
-                indegree[it]++;
-            }
-        }
-        queue<int>q;
-        for(int i=0;i<numCourses;i++){
-            if(indegree[i]==0){
-                q.push(i);
-            }
+        int n=numCourses;
+        vector<int>res;
+        stack<int>st;
+        vector<int>vis(n,0);
+        vector<vector<int>>adj(n);
+
+        for(auto e:prerequisites){
+            adj[e[0]].push_back(e[1]);
         }
 
-        vector<int>topo;
-        // int cnt=0;
-        while(!q.empty()){
-            int num=q.front();
-            q.pop();
-            topo.push_back(num);
-            // cnt++;
-
-            for(auto it:adj[num]){
-                indegree[it]--;
-                if(indegree[it]==0){
-                    q.push(it);
-                }
+        for(int i=0;i<n;i++){
+            if(vis[i]==0){
+               if(top(i,adj,vis,st)){
+                return {};
+               }
             }
         }
-        if(topo.size()==numCourses) return topo;
-        return {};
+        
+        while(!st.empty()){
+            res.push_back(st.top());
+            st.pop();
+        }
+        reverse(res.begin(),res.end());
+        return res;
     }
 };
