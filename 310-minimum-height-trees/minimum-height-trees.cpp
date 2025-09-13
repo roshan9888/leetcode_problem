@@ -1,44 +1,36 @@
 class Solution {
 public:
     vector<int> findMinHeightTrees(int n, vector<vector<int>>& edges) {
-        if (n == 1) return {0};
-    
-        std::vector<std::list<int>> adjacency_list(n);
-        std::vector<int> degree(n, 0);
-        for (auto& edge : edges) {
-            int u = edge[0], v = edge[1];
-            adjacency_list[u].push_back(v);
-            adjacency_list[v].push_back(u);
-            degree[u]++;
-            degree[v]++;
+        if(n==1) return {0};
+        vector<vector<int>>adj(n);
+        vector<int>deg(n,0);
+        for(auto e:edges){
+            adj[e[0]].push_back(e[1]);
+            adj[e[1]].push_back(e[0]);
+            deg[e[0]]++;
+            deg[e[1]]++;
         }
         
-        std::queue<int> leaves;
-        for (int i = 0; i < n; ++i) {
-            if (degree[i] == 1) leaves.push(i);
+        queue<int>q;
+        for(int i=0;i<n;i++){
+            if(deg[i]==1) q.push(i);
         }
-        
-        int remainingNodes = n;
-        while (remainingNodes > 2) {
-            int leavesCount = leaves.size();
-            remainingNodes -= leavesCount;
-            for (int i = 0; i < leavesCount; ++i) {
-                int leaf = leaves.front();
-                leaves.pop();
-                for (int neighbor : adjacency_list[leaf]) {
-                    if (--degree[neighbor] == 1) {
-                        leaves.push(neighbor);
-                    }
-                }
+
+        vector<int>res;
+        while(!q.empty()){
+            int s=q.size();
+            res.clear();
+            for(int i=0;i<s;i++){
+               int node=q.front();
+               q.pop();
+               res.push_back(node);
+               for(auto it:adj[node]){
+               deg[it]--;
+               if(deg[it]==1) q.push(it
+               );
+               }
             }
         }
-        
-        std::vector<int> result;
-        while (!leaves.empty()) {
-            result.push_back(leaves.front());
-            leaves.pop();
-        }
-        
-        return result;
+        return res;
     }
 };
